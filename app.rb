@@ -20,6 +20,11 @@ get "/about" do
 	erb :about
 end
 
+get "/cart" do
+	
+	erb :cart
+end
+
 post "/cart" do
-	erb "Hello"
+	erb :cart
 end
