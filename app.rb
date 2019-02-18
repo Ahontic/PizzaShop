@@ -7,8 +7,6 @@ require 'sinatra/activerecord'
 set :database, "sqlite3:pizzashop.db"
 
 class Product < ActiveRecord::Base
-
-
 end
 
 get '/' do
@@ -20,23 +18,20 @@ get "/about" do
 	erb :about
 end
 
-get "/cart" do
-	
-end
-
 post "/cart" do
-	orders_line = params[:orders]
+	orders_input = params[:orders]
 	@orders = parse_orders_input orders_input
-	erb "Hello! #{@orders.inspect}"
+	
+	erb :cart
 end
 
-def parse_orders_line orders_input
+def parse_orders_input orders_input
 	
 	s1 = orders_input.split(/,/)
 	arr = []
 
 	s1.each do |x|
-		s2 = x.split(/\=/)
+		s2 = x.split(/=/)
 
 		s3 = s2[0].split(/_/)
 
