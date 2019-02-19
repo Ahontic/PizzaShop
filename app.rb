@@ -18,11 +18,17 @@ get '/' do
 	erb :index
 end
 
-get "/about" do
+get '/about' do
 	erb :about
 end
 
-post "/cart" do
+post '/place_order' do
+
+	@order = Order.create params[:order]
+	erb :order_placed
+end
+
+post '/cart' do
 	@orders_input = params[:orders]
 	@items = parse_orders_input @orders_input
 	
@@ -31,11 +37,8 @@ post "/cart" do
 		item[0] = Product.find(item[0])
 	end
 
-	@o = Order.new params[:order]
-	if @o.save		
-		erb "<h2> Спасибо, Ваш заказ принят!</h2>"
-			erb :cart
-	end
+	erb :cart
+end
 	
 
 def parse_orders_input orders_input
@@ -57,4 +60,3 @@ def parse_orders_input orders_input
 	end
 		return arr
 	end
-end
