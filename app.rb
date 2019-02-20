@@ -13,6 +13,11 @@ class Order < ActiveRecord::Base
 
 end
 
+before do
+	@orders = Order.all
+	
+end
+
 get '/' do
 	@products = Product.all
 	erb :index
@@ -26,6 +31,10 @@ post '/place_order' do
 
 	@order = Order.create params[:order]
 	erb :order_placed
+end
+
+get '/admin' do
+	erb :admin
 end
 
 post '/cart' do
